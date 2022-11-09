@@ -101,120 +101,129 @@ int main(int argc, char *argv[])
 
 	while (1)
 	{
+		snprintf(sendBuff, sizeof(sendBuff), "Thanks");
+        write(connfd, sendBuff, strlen(sendBuff));
+
+        // read and print
+        int n = 0;
+        if ((n = read(connfd, recvBuff, sizeof(recvBuff)-1)) > 0) {
+            recvBuff[n] = 0;
+            fputs(recvBuff, stdout);
+        }
 
 
 		
 		// sleep mode detect.
-		if (!bSleep && ((OS_GetTickCount() - LastActionTime) > MaxIdleTime))
-		{
-			bSleep = true;
-			LastActionTime = OS_GetTickCount();
-			Spider.Sleep();
-			LED_PIO.SetLED(0x1);
-		}
+		// if (!bSleep && ((OS_GetTickCount() - LastActionTime) > MaxIdleTime))
+		// {
+		// 	bSleep = true;
+		// 	LastActionTime = OS_GetTickCount();
+		// 	Spider.Sleep();
+		// 	LED_PIO.SetLED(0x1);
+		// }
 
-		if (BUTTON_PIO.GetBUTTON() == 0x2)
-		{
-			if (bSleep)
-			{
-				bSleep = false;
-				Spider.WakeUp();
-				LED_PIO.SetLED(0x7f);
-			}
-			Spider.Reset();
-			LastActionTime = OS_GetTickCount();
-		}
-		else if (BUTTON_PIO.GetBUTTON() == 0x1)
-		{
-			if (bSleep)
-			{
-				bSleep = false;
-				Spider.WakeUp();
-				LED_PIO.SetLED(0x7f);
-			}
-			Spider.DEMO_Dance(1);
-			LastActionTime = OS_GetTickCount();
-		}
+		// if (BUTTON_PIO.GetBUTTON() == 0x2)
+		// {
+		// 	if (bSleep)
+		// 	{
+		// 		bSleep = false;
+		// 		Spider.WakeUp();
+		// 		LED_PIO.SetLED(0x7f);
+		// 	}
+		// 	Spider.Reset();
+		// 	LastActionTime = OS_GetTickCount();
+		// }
+		// else if (BUTTON_PIO.GetBUTTON() == 0x1)
+		// {
+		// 	if (bSleep)
+		// 	{
+		// 		bSleep = false;
+		// 		Spider.WakeUp();
+		// 		LED_PIO.SetLED(0x7f);
+		// 	}
+		// 	Spider.DEMO_Dance(1);
+		// 	LastActionTime = OS_GetTickCount();
+		// }
 
-		if (!QueueCommand.IsEmpty() && QueueCommand.Pop(&Command, &Param))
-		{
-			if (bSleep)
-			{
-				bSleep = false;
-				Spider.WakeUp();
-				LED_PIO.SetLED(0x7f);
-			}
+		// if (!QueueCommand.IsEmpty() && QueueCommand.Pop(&Command, &Param))
+		// {
+		// 	if (bSleep)
+		// 	{
+		// 		bSleep = false;
+		// 		Spider.WakeUp();
+		// 		LED_PIO.SetLED(0x7f);
+		// 	}
 
-			switch (Command)
-			{
-			case CMD_FORWARD:
-				printf("CMD_FORWARD\n");
-				Spider.MoveForward(1);
-				break;
-			case CMD_BACKWARD:
-				printf("CMD_BACKWARD\n");
-				Spider.MoveBackward(1);
-				break;
-			case CMD_TURN_RIGHT:
-				printf("CMD_TURN_RIHGT\n");
-				Spider.RotatelRight(1);
-				break;
-			case CMD_TURN_LEFT:
-				printf("CMD_TURN_LEFT\n");
-				Spider.RotatelLeft(1);
-				break;
-			case CMD_TILTL:
-				printf("CMD_TILTL\n");
-				Spider.TiltLeft();
-				break;
-			case CMD_TILTR:
-				printf("CMD_TILTR\n");
-				Spider.TiltRight();
-				break;
-			case CMD_TILTF:
-				printf("CMD_TILTF\n");
-				Spider.TiltForward();
-				break;
-			case CMD_TILTB:
-				printf("CMD_TILTB\n");
-				Spider.TiltBackward();
-				break;
-			case CMD_TILTN:
-				printf("CMD_TILTN\n");
-				Spider.TiltNone();
-				break;
-			case CMD_STOP:
-				printf("CMD_STOP\n");
-				Spider.Reset();
-				break;
-			case CMD_SPEED:
-				printf("CMD_SPPED %d \n", Param);
-				Spider.SetSpeed(Param);
-				break;
-			case CMD_TURN_LEFT_DGREE:
-				printf("CMD_TURN_LEFT_DGREE %d \n", Param);
-				break;
-			case CMD_TURN_RIGHT_DGREE:
-				printf("CMD_TURN_RIHGT_DGREE %d \n", Param);
-				break;
-			case CMD_Query_Version:
-				printf("CMD_Query_Version\n");
-				break;
-			case CMD_JOYSTICK:
-				printf("CMD_JOYSTICK (Param=%d)\n", Param);
-				break;
-			case CMD_ALL:
-				printf("CMD_ALL\n");
-				Spider.DEMO_Dance(1);
-				QueueCommand.Clear();
-				break;
-			default:
-				printf("Nothing\n");
-				break;
-			} // switch
-			LastActionTime = OS_GetTickCount();
-			// printf("rx:%xh\r\n", Data8);
-		}
+		// 	switch (Command)
+		// 	{
+		// 	case CMD_FORWARD:
+		// 		printf("CMD_FORWARD\n");
+		// 		Spider.MoveForward(1);
+		// 		break;
+		// 	case CMD_BACKWARD:
+		// 		printf("CMD_BACKWARD\n");
+		// 		Spider.MoveBackward(1);
+		// 		break;
+		// 	case CMD_TURN_RIGHT:
+		// 		printf("CMD_TURN_RIHGT\n");
+		// 		Spider.RotatelRight(1);
+		// 		break;
+		// 	case CMD_TURN_LEFT:
+		// 		printf("CMD_TURN_LEFT\n");
+		// 		Spider.RotatelLeft(1);
+		// 		break;
+		// 	case CMD_TILTL:
+		// 		printf("CMD_TILTL\n");
+		// 		Spider.TiltLeft();
+		// 		break;
+		// 	case CMD_TILTR:
+		// 		printf("CMD_TILTR\n");
+		// 		Spider.TiltRight();
+		// 		break;
+		// 	case CMD_TILTF:
+		// 		printf("CMD_TILTF\n");
+		// 		Spider.TiltForward();
+		// 		break;
+		// 	case CMD_TILTB:
+		// 		printf("CMD_TILTB\n");
+		// 		Spider.TiltBackward();
+		// 		break;
+		// 	case CMD_TILTN:
+		// 		printf("CMD_TILTN\n");
+		// 		Spider.TiltNone();
+		// 		break;
+		// 	case CMD_STOP:
+		// 		printf("CMD_STOP\n");
+		// 		Spider.Reset();
+		// 		break;
+		// 	case CMD_SPEED:
+		// 		printf("CMD_SPPED %d \n", Param);
+		// 		Spider.SetSpeed(Param);
+		// 		break;
+		// 	case CMD_TURN_LEFT_DGREE:
+		// 		printf("CMD_TURN_LEFT_DGREE %d \n", Param);
+		// 		break;
+		// 	case CMD_TURN_RIGHT_DGREE:
+		// 		printf("CMD_TURN_RIHGT_DGREE %d \n", Param);
+		// 		break;
+		// 	case CMD_Query_Version:
+		// 		printf("CMD_Query_Version\n");
+		// 		break;
+		// 	case CMD_JOYSTICK:
+		// 		printf("CMD_JOYSTICK (Param=%d)\n", Param);
+		// 		break;
+		// 	case CMD_ALL:
+		// 		printf("CMD_ALL\n");
+		// 		Spider.DEMO_Dance(1);
+		// 		QueueCommand.Clear();
+		// 		break;
+		// 	default:
+		// 		printf("Nothing\n");
+		// 		break;
+		// 	} // switch
+		// 	LastActionTime = OS_GetTickCount();
+		// 	// printf("rx:%xh\r\n", Data8);
+		// }
 	}
 
 	return 0;
