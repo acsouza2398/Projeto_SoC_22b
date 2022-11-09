@@ -24,12 +24,12 @@ typedef enum
 	CMD_AT,
 	CMD_FORWARD,
 	CMD_BACKWARD,
-	CMD_TURN_RIHGT,
+	CMD_TURN_RIGHT,
 	CMD_TURN_LEFT,
-	CMD_TURN_RIHGT_DGREE,
+	CMD_TURN_RIGHT_DGREE,
 	CMD_TURN_LEFT_DGREE,
 	CMD_STOP,
-	CMD_SPPED,
+	CMD_SPEED,
 	CMD_TILTL,
 	CMD_TILTR,
 	CMD_TILTF,
@@ -155,7 +155,7 @@ int main(int argc, char *argv[])
 				printf("CMD_BACKWARD\n");
 				Spider.MoveBackward(1);
 				break;
-			case CMD_TURN_RIHGT:
+			case CMD_TURN_RIGHT:
 				printf("CMD_TURN_RIHGT\n");
 				Spider.RotatelRight(1);
 				break;
@@ -187,14 +187,14 @@ int main(int argc, char *argv[])
 				printf("CMD_STOP\n");
 				Spider.Reset();
 				break;
-			case CMD_SPPED:
+			case CMD_SPEED:
 				printf("CMD_SPPED %d \n", Param);
 				Spider.SetSpeed(Param);
 				break;
 			case CMD_TURN_LEFT_DGREE:
 				printf("CMD_TURN_LEFT_DGREE %d \n", Param);
 				break;
-			case CMD_TURN_RIHGT_DGREE:
+			case CMD_TURN_RIGHT_DGREE:
 				printf("CMD_TURN_RIHGT_DGREE %d \n", Param);
 				break;
 			case CMD_Query_Version:
