@@ -11,7 +11,15 @@ sock.connect((host))
 @app.route("/", methods=['GET', 'POST'])
 def index():
     if request.method == "POST":
-        sock.sendall(bytes('1', "utf-8"))
+        
+        if request.form['statusLed'] == 'Ligar':
+
+            sock.sendall(bytes('1', "utf-8"))
+
+
+        elif request.form['statusLed'] == 'Desligar':
+
+            sock.sendall(bytes('7', "utf-8"))
 
     return render_template('pagina.html', status = 0)
 

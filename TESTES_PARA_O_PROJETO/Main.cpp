@@ -101,16 +101,82 @@ int main(int argc, char *argv[])
 
 	while (1)
 	{
-		snprintf(sendBuff, sizeof(sendBuff), "Thanks");
-        write(connfd, sendBuff, strlen(sendBuff));
-
-        // read and print
-        int n = 0;
+		int n = 0;
         if ((n = read(connfd, recvBuff, sizeof(recvBuff)-1)) > 0) {
             recvBuff[n] = 0;
-            fputs(recvBuff, stdout);
+			printf(recvBuff);
+			printf("Entrei\r\n");
+			int comando = atoi(recvBuff);
+			switch (comando)
+			{
+			case CMD_FORWARD:
+				printf("CMD_FORWARD\n");
+				Spider.MoveForward(1);
+				break;
+			case CMD_BACKWARD:
+				printf("CMD_BACKWARD\n");
+				Spider.MoveBackward(1);
+				break;
+			case CMD_TURN_RIGHT:
+				printf("CMD_TURN_RIHGT\n");
+				Spider.RotatelRight(1);
+				break;
+			case CMD_TURN_LEFT:
+				printf("CMD_TURN_LEFT\n");
+				Spider.RotatelLeft(1);
+				break;
+			case CMD_TILTL:
+				printf("CMD_TILTL\n");
+				Spider.TiltLeft();
+				break;
+			case CMD_TILTR:
+				printf("CMD_TILTR\n");
+				Spider.TiltRight();
+				break;
+			case CMD_TILTF:
+				printf("CMD_TILTF\n");
+				Spider.TiltForward();
+				break;
+			case CMD_TILTB:
+				printf("CMD_TILTB\n");
+				Spider.TiltBackward();
+				break;
+			case CMD_TILTN:
+				printf("CMD_TILTN\n");
+				Spider.TiltNone();
+				break;
+			case CMD_STOP:
+				printf("CMD_STOP\n");
+				Spider.Reset();
+				break;
+			case CMD_SPEED:
+				printf("CMD_SPEED %d \n", Param);
+				Spider.SetSpeed(Param);
+				break;
+			case CMD_TURN_LEFT_DGREE:
+				printf("CMD_TURN_LEFT_DGREE %d \n", Param);
+				break;
+			case CMD_TURN_RIGHT_DGREE:
+				printf("CMD_TURN_RIHGT_DGREE %d \n", Param);
+				break;
+			case CMD_Query_Version:
+				printf("CMD_Query_Version\n");
+				break;
+			case CMD_JOYSTICK:
+				printf("CMD_JOYSTICK (Param=%d)\n", Param);
+				break;
+			case CMD_ALL:
+				printf("CMD_ALL\n");
+				Spider.DEMO_Dance(1);
+				QueueCommand.Clear();
+				break;
+			default:
+				printf("Nothing\n");
+				break;
+			} // switch
+			
         }
-
+		
 
 		
 		// sleep mode detect.
