@@ -1,18 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--  Load CSS in Flask with html-->
+    <link rel="stylesheet" href='style.css' />
+ 
+  </head>
+  <body>
+    <form action="/" method="post">
 
-<form action="/" method="post">
-
-    <h1>Mudar o status do Led:</h1>
-    <input type="submit" value="Ligar" name="statusLed" />
-    <input type="submit" value="Desligar" name="statusLed" />
-    </br></br>
-
-    <h1>Status do Botao:</h1>
-    <h2 id="result">Teste</h2>
-    {% if status == 0 %}
-    <h1></h1>
-    {% elif status == 1 %}
-    <h1> Led ligado</h1>
-    {% elif status == 2 %}
-    <h1> Led desligado</h1>
-    {% endif %}
-</form>
+        <h1>Controlar Aranha:</h1>
+        <input type="submit" value="Forward" name="command" id="top"/> <br>
+        <input type="submit" value="Left" name="command"/>
+        <input type="submit" value="Backward" name="command"/>
+        <input type="submit" value="Right" name="command"/> <br><br><br><br>
+        <input type="submit" value="TiltF" name="command" id="top"/> <br>
+        <input type="submit" value="TiltL" name="command"/>
+        <input type="submit" value="TiltB" name="command"/> 
+        <input type="submit" value="TiltR" name="command"/> <br><br><br><br>
+        <input type="submit" value="TurnL" name="command"/>
+        <input type="submit" value="TurnR" name="command"/> <br><br><br><br>
+        <input type="submit" value="Dance" name="command"/>
+        <input type="submit" value="Stop" name="command"/>
+        <input type="submit" value="Speed" name="command"/> </br></br>
+    </form>
+  </body>
+</html>

@@ -12,16 +12,59 @@ sock.connect((host))
 def index():
     if request.method == "POST":
         
-        if request.form['statusLed'] == 'Ligar':
+        if request.form['command'] == 'Forward':
 
             sock.sendall(bytes('1', "utf-8"))
 
+        elif request.form['command'] == 'Backward':
 
-        elif request.form['statusLed'] == 'Desligar':
+            sock.sendall(bytes('2', "utf-8"))
+
+        elif request.form['command'] == 'Right':
+
+            sock.sendall(bytes('3', "utf-8"))
+
+        elif request.form['command'] == 'Left':
+
+            sock.sendall(bytes('4', "utf-8"))
+        
+        elif request.form['command'] == 'TiltL':
+
+            sock.sendall(bytes('9', "utf-8"))
+
+        elif request.form['command'] == 'TiltR':
+
+            sock.sendall(bytes('10', "utf-8"))
+
+        elif request.form['command'] == 'TiltF':
+
+            sock.sendall(bytes('11', "utf-8"))
+
+        elif request.form['command'] == 'TiltB':
+
+            sock.sendall(bytes('12', "utf-8"))
+
+        elif request.form['command'] == 'Stop':
 
             sock.sendall(bytes('7', "utf-8"))
 
-    return render_template('pagina.html', status = 0)
+        elif request.form['command'] == 'Speed':
+
+            sock.sendall(bytes('8', "utf-8"))
+
+        elif request.form['command'] == 'TurnR':
+
+            sock.sendall(bytes('5', "utf-8"))
+
+        elif request.form['command'] == 'TurnL':
+
+            sock.sendall(bytes('6', "utf-8"))
+
+        elif request.form['command'] == 'Dance':
+
+            sock.sendall(bytes('16', "utf-8"))
+
+    return render_template('pagina.html')
 
 
 

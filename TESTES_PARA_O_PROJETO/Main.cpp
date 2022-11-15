@@ -118,7 +118,7 @@ int main(int argc, char *argv[])
 				Spider.MoveBackward(1);
 				break;
 			case CMD_TURN_RIGHT:
-				printf("CMD_TURN_RIHGT\n");
+				printf("CMD_TURN_RIGHT\n");
 				Spider.RotatelRight(1);
 				break;
 			case CMD_TURN_LEFT:
@@ -157,7 +157,7 @@ int main(int argc, char *argv[])
 				printf("CMD_TURN_LEFT_DGREE %d \n", Param);
 				break;
 			case CMD_TURN_RIGHT_DGREE:
-				printf("CMD_TURN_RIHGT_DGREE %d \n", Param);
+				printf("CMD_TURN_RIGHT_DGREE %d \n", Param);
 				break;
 			case CMD_Query_Version:
 				printf("CMD_Query_Version\n");
