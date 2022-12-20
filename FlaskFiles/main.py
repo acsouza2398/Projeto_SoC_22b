@@ -48,18 +48,6 @@ def index():
 
             sock.sendall(bytes('7', "utf-8"))
 
-        elif request.form['command'] == 'Speed':
-
-            sock.sendall(bytes('8', "utf-8"))
-
-        elif request.form['command'] == 'TurnR':
-
-            sock.sendall(bytes('5', "utf-8"))
-
-        elif request.form['command'] == 'TurnL':
-
-            sock.sendall(bytes('6', "utf-8"))
-
         elif request.form['command'] == 'Dance':
 
             sock.sendall(bytes('16', "utf-8"))
